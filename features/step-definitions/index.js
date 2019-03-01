@@ -10,7 +10,7 @@ defineSupportCode(({Given, When, Then}) => {
   });
 
   When('I open the login screen', () => {
-    browser.waitForVisible('button=Ingresar', 5000);
+    browser.waitForVisible('button=Ingresar', 15000);
     browser.click('button=Ingresar');
   });
 
@@ -27,7 +27,7 @@ defineSupportCode(({Given, When, Then}) => {
   });
 
 Then('I expect to see {string}', error => {
-    browser.waitForVisible('.aviso.alert.alert-danger', 10000);
+    browser.waitForVisible('.aviso.alert.alert-danger', 15000);
     var alertText = browser.element('.aviso.alert.alert-danger').getText();
     expect(alertText).to.include(error);
   });
@@ -69,25 +69,37 @@ Then('I expect to see {string}', error => {
     var cajaLogIn = browser.element('.cuenta');
   });
 
-  When('I try to register', () => {
-    var cajaLogIn = browser.element('.cajaSignUp');
-    cajaLogIn.element('button=Registrarse').click()
-  });
+  When(/^I fill register with (.*) and (.*)$/ , (name, lastname, email) => {
 
-  When(/^I fill register with (.*) and (.*)$/ , (name, lastname) => {
-     var cajaLogIn = browser.element('.cajaSignUp');
+    var cajaSignUp = browser.element('.cajaSignUp');
 
-    var mailInput = cajaLogIn.element('input[name="nombre"]');
-    mailInput.click();
-    mailInput.keys(name);
 
-    var passwordInput = cajaLogIn.element('input[name="apellido"]');
-    passwordInput.click();
-    passwordInput.keys(lastname)
+
+    var nameInput = cajaSignUp.element('input[name="nombre"]');
+    nameInput.click();
+    nameInput.keys(name);
+
+
+    var lastnameInput = cajaSignUp.element('input[name="apellido"]');
+    lastnameInput.click();
+    lastnameInput.keys(lastname);
+
+
+    var lastnameInput = cajaSignUp.element('input[name="correo"]');
+    lastnameInput.click();
+    lastnameInput.keys(email); 
+
+    check(cajaSignUp.element('input[name="acepta"]'));
+    
   });
 
   Then('I expect to be able to register sucess', () => {
     var cajaLogIn = browser.element('.cuenta');
+  });
+
+  When('I try to register', () => {
+    var cajaSignUp = browser.element('.cajaSignUp');
+    cajaSignUp.element('button=Registrarse').click();
   });
 
 

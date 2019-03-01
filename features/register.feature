@@ -19,10 +19,10 @@ Scenario Outline: Login sucess with corect inputs
 
   Given I go to losestudiantes home screen
     When I open the login screen
-    And I fill sucess with <email> and <password>
-    And I try to login
-    Then I expect to be able to login sucess
+    And I fill register with <name> and <lastname> and <email>
+    And I try to register
+    Then I expect to be able to register sucess
 
     Examples:
-      | email                          | password     |
-      | captuayonovoafredy@gmail.com   |    1234567890|
+      |name|lastname| email|
+      |fredy|1234567890|captuayonovoafredy1@gmail.com|
