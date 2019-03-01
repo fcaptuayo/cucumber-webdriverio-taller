@@ -4,9 +4,9 @@ var {expect} = require('chai');
 defineSupportCode(({Given, When, Then}) => {
   Given('I go to losestudiantes home screen', () => {
     browser.url('/');
-    //if(browser.isVisible('button=Cerrar')) {
-    //  browser.click('button=Cerrar');
-    //}
+    if(browser.isVisible('button=Cerrar')) {
+      browser.click('button=Cerrar');
+    }
   });
 
   When('I open the login screen', () => {
@@ -50,7 +50,7 @@ Then('I expect to see {string}', error => {
   });
 
   Then('I expect to not be able to login', () => {
-    browser.waitForVisible('.aviso.alert.alert-danger', 10000);
+    browser.waitForVisible('.aviso.alert.alert-danger', 15000);
   });
 
   When(/^I fill sucess with (.*) and (.*)$/ , (email, password) => {
@@ -85,12 +85,12 @@ Then('I expect to see {string}', error => {
     lastnameInput.keys(lastname);
 
 
-    var lastnameInput = cajaSignUp.element('input[name="correo"]');
-    lastnameInput.click();
-    lastnameInput.keys(email); 
+    var emailInput = cajaSignUp.element('input[name="correo"]');
+    emailInput.click();
+    emailInput.keys(email); 
 
     check(cajaSignUp.element('input[name="acepta"]'));
-    
+
   });
 
   Then('I expect to be able to register sucess', () => {
